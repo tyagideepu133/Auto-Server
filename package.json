@@ -1,0 +1,29 @@
+{
+  "name": "gokart",
+  "version": "1.0.0",
+  "description": "Go kart server",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepanshut041/Go-Kart-Server.git"
+  },
+  "author": "Deepanhu  tyagi",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "jsonwebtoken": "^7.4.3",
+    "mongoose": "^4.11.9",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/deepanshut041/Go-Kart-Server/issues"
+  },
+  "homepage": "https://github.com/deepanshut041/Go-Kart-Server#readme"
+}
