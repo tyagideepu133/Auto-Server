@@ -26,6 +26,10 @@ module.exports.getDriverByAddhaar = function(driver_uid, callback){
     Drivers.find(query, callback);
 }
 
+module.exports.getDriverAll = function(callback){
+    Drivers.find({}, callback);
+}
+
 module.exports.getDriverByData = function(driver_name, driver_dob, callback){
     const query = {driver_dob:driver_dob,
         driver_name:driver_name

@@ -23,7 +23,7 @@ const app = express();
 const api = require('./routes/index.js');
 
 //Port Number
-const port = 3000;
+const port = 3001;
 
 //CORS Middleware
 app.use(cors());

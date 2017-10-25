@@ -24,6 +24,17 @@ router.post('/drivers/new', (req, res, next)=>{
     })
 });
 
+router.get('/drivers/driver/all', (req, res, next)=>{
+    Drivers.getDriverAll((err, driver)=>{
+        if (err) {
+            res.json({"error":"error"});
+            console.log(err)
+        } else {
+            res.json(driver);
+        }
+    })
+});
+
 router.get('/drivers/driver/:name/:dob', (req, res, next)=>{
     let name = req.params.name;
     let dob = req.prams.dob;
