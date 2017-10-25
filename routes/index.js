@@ -14,12 +14,18 @@ router.post('/drivers/new', (req, res, next)=>{
         driver_dob: req.body.driver_dob,
         driver_dl: req.body.driver_dl
     });
-    Drivers.addDriver(newDriver,(err,driver)=>{
+    Drivers.getDriverByUid(req.body.driver_uid,(err,driver)=>{
         if (err) {
-            res.json({success:false, msg:"Failed to add the driver in database"});
-            console.log(err);
+            Drivers.addDriver(newDriver,(err,driver)=>{
+                if (err) {
+                    res.json({success:false, msg:"Failed to add the driver in database"});
+                    console.log(err);
+                } else {
+                    res.json({success:true, msg:"Driver added succefully"});
+                }
+            })
         } else {
-            res.json({success:true, msg:"Driver added succefully"});
+            res.json({success:false, msg:"Driver allredy existed"});
         }
     })
 });
@@ -35,13 +41,11 @@ router.get('/drivers/driver/all', (req, res, next)=>{
     })
 });
 
-router.get('/drivers/driver/:name/:dob', (req, res, next)=>{
-    let name = req.params.name;
-    let dob = req.prams.dob;
-    Drivers.getDriverByData(name, dob, (err, driver)=>{
+router.get('/drivers/driver/dl/:id', (req, res, next)=>{
+    let id = req.params.id;
+    Drivers.getDriverByDl(id, (err, driver)=>{
         if (err) {
             res.json({"error":"error"});
-            console.log(err)
         } else {
             res.json(driver);
         }

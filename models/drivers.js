@@ -37,6 +37,12 @@ module.exports.getDriverByData = function(driver_name, driver_dob, callback){
     Drivers.find(query, callback);
 }
 
+module.exports.getDriverByDl = function(driver_dl, callback){
+    const query = {driver_dl:driver_dl
+    };
+    Drivers.findOne(query, callback);
+}
+
 module.exports.addDriver = function(newDriver, callback){
     newDriver.save(callback);
 }
