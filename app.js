@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passportAdmin')(passport);
+//require('./config/passportAdmin')(passport);
 //Index Route
 app.use('/api', api);
 
