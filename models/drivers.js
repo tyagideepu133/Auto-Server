@@ -14,8 +14,7 @@ const driverSchema = mongoose.Schema({
         required: true
     },
     driver_dl : {
-        type: String,
-        required: true
+        type: String
     }
 });
 
