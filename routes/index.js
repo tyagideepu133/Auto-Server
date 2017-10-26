@@ -14,18 +14,12 @@ router.post('/drivers/new', (req, res, next)=>{
         driver_dob: req.body.driver_dob,
         driver_dl: req.body.driver_dl
     });
-    Drivers.getDriverByUid(req.body.driver_uid,(err,driver)=>{
+    Drivers.addDriver(newDriver,(err,driver)=>{
         if (err) {
-            Drivers.addDriver(newDriver,(err,driver)=>{
-                if (err) {
-                    res.json({success:false, msg:"Failed to add the driver in database"});
-                    console.log(err);
-                } else {
-                    res.json({success:true, msg:"Driver added succefully"});
-                }
-            })
+            res.json({success:false, msg:"Failed to add the driver in database"});
+            console.log(err);
         } else {
-            res.json({success:false, msg:"Driver allredy existed"});
+            res.json({success:true, msg:"Driver added succefully"});
         }
     })
 });

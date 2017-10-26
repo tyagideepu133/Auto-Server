@@ -21,9 +21,9 @@ const driverSchema = mongoose.Schema({
 const Drivers = module.exports = mongoose.model('drivers_data', driverSchema);
 
 
-module.exports.getDriverByAddhaar = function(driver_uid, callback){
+module.exports.getDriverByUid = function(driver_uid, callback){
     const query = {driver_uid:driver_uid};
-    Drivers.find(query, callback);
+    Drivers.findOne(query, callback);
 }
 
 module.exports.getDriverAll = function(callback){
