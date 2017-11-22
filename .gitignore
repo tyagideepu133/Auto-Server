@@ -34,6 +34,10 @@ testem.log
 /typings
 yarn-error.log
 
+#Databases
+db.sqlite3
+auto/__pycache__/
+
 # e2e
 /e2e/*.js
 /e2e/*.map
