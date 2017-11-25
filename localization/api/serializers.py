@@ -18,6 +18,7 @@ class CarModelSerializer(serializers.ModelSerializer):
         fields = [
             'car_id',
             'car_password',
+            'car_type',
         ]
 class CarJourneyModelSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,4 +32,4 @@ class CarJourneyModelSerializer(serializers.ModelSerializer):
         'jfuel_con',
         'jend_status',
         'jcar_number',
-        'jdriver_id']
+        'jdriver_id',]

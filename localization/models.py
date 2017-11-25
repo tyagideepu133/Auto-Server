@@ -13,7 +13,7 @@ class Driver(models.Model):
         return str(self.driver_name)
 
 class Car(models.Model):
-    car_id = models.CharField(max_length = 20, unique = True)
+    car_id = models.CharField(max_length = 20, unique = True, primary_key = True)
     car_password = models.CharField(max_length = 150)
     car_type = models.CharField(max_length = 20,default = "normal")
     def __str__(self):
@@ -26,7 +26,7 @@ class CarStatus(models.Model):
     car_fuel = models.DecimalField(null = False, default = 0.0, max_digits = 6, decimal_places = 6)
     car_temp = models.DecimalField(null = False, default = 0.0, max_digits = 6, decimal_places = 6)
     car_status = models.CharField(max_length = 20, default = "off" )
-    car_number = models.ForeignKey(Car)
+    car_number = models.OneToOneField(Car, primary_key = True)
     car_driver_id = models.ForeignKey(Driver)
     def __str__(self):
         return str(self.car_number)
@@ -44,3 +44,4 @@ class CarJourney(models.Model):
     jdate = models.DateTimeField(auto_now=True)
     def __str__(self):
         return str(self.jcar_number)
+
