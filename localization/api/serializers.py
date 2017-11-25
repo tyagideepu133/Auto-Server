@@ -7,7 +7,8 @@ class DriverModelSerializer(serializers.ModelSerializer):
         model = Driver
         fields = [
             'driver_id',
-            'name',
-            'data_of_birth',
-            'addhar_number'
+            'driver_name',
+            'driver_dob',
+            'driver_uidai',
+            'driver_password'
         ]
