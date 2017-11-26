@@ -2,11 +2,11 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..models import (Driver, Car)
-from .serializers import (DriverModelSerializer, CarModelSerializer)
+from ..models import (Driver, Car, CarStatus)
+from .serializers import (DriverModelSerializer, CarModelSerializer, CarStatusModelSerializer, CarJourneyModelSerializer)
 
 
-class DriverAPIView(APIView):
+class DriverListAPIView(APIView):
 
     def get(self, request):
         drivers = Driver.objects.all()
@@ -48,8 +48,7 @@ class DriverDetailAPIView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
-class CarAPIView(APIView):
+class CarListAPIView(APIView):
 
     def get(self, request):
         cars = Car.objects.all()
@@ -97,4 +96,46 @@ class CarDetailAPIView(APIView):
     def delete(self, request, username):
         car = self.get_object(username)
         car.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CarStatusListAPIView(APIView):
+
+    def get(self, request):
+        cars = CarStatus.objects.all()
+        serializer = CarStatusModelSerializer(cars, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer=CarStatusModelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CarStatusDetailAPIView(APIView):
+
+    def get_object(self, pk):
+        try:
+            return CarStatus.objects.get(car_number=pk)
+        except CarStatus.DoesNotExist:
+            raise Http404
+
+    def get(self, request, username):
+        car_status = self.get_object(username)
+        serializer = CarStatusModelSerializer(car_status)
+        return Response(serializer.data)
+
+    def put(self, request, username):
+        car_status = self.get_object(username)
+        serializer = CarStatusModelSerializer(car_status, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, username):
+        car_status = self.get_object(username)
+        car_status.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
