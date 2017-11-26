@@ -39,16 +39,22 @@ class CarStatusModelSerializer(serializers.ModelSerializer):
             'car_driver_id'
         ]
 
+
 class CarJourneyModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarJourney
         fields = [
-        'jstart_lat',
-        'jstart_lon',
-        'jend_lat',
-        'jend_lon',
-        'javg_speed',
-        'jfuel_con',
-        'jend_status',
-        'jcar_number',
-        'jdriver_id',]
+            'id',
+            'jstart_lat',
+            'jstart_lon',
+            'jend_lat',
+            'jend_lon',
+            'javg_speed',
+            'jfuel_con',
+            'jend_status',
+            'jcar_number',
+            'jdriver_id',
+            'jdate',
+            'jstart_time',
+            'jend_time'
+        ]

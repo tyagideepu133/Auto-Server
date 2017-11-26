@@ -49,7 +49,9 @@ class CarJourney(models.Model):
     jend_status = models.CharField(max_length=20, default="off")
     jcar_number = models.ForeignKey(Car)
     jdriver_id = models.ForeignKey(Driver)
-    jdate = models.DateTimeField(auto_now=True)
+    jdate = models.DateField(auto_now=True)
+    jstart_time = models.TimeField(auto_now=True)
+    jend_time = models.TimeField(default=jstart_time)
 
     def __str__(self):
         return str(self.jcar_number)
