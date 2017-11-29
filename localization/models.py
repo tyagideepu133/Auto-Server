@@ -40,18 +40,42 @@ class CarStatus(models.Model):
 
 
 class CarJourney(models.Model):
-    jstart_lat = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    jstart_lon = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    jend_lat = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    jend_lon = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    javg_speed = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    jfuel_con = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    jend_status = models.CharField(max_length=20, default="off")
+    jstart_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    jstart_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    jend_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    jend_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    javg_speed = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    jfuel_con = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    jend_status = models.CharField(max_length=20, default="off", null=False)
     jcar_number = models.ForeignKey(Car)
     jdriver_id = models.ForeignKey(Driver)
-    jdate = models.DateField(auto_now=True)
-    jstart_time = models.TimeField(auto_now=True)
-    jend_time = models.TimeField(default=jstart_time)
+    jdate = models.DateField(auto_now_add=True, null=True)
+    jstart_time = models.TimeField(auto_now_add=True, null=True, editable=False)
+    jend_time = models.TimeField(auto_now=True)
+
+
+class CarEmergency(models.Model):
+    vc_start_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    vc_start_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    vc_end_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    vc_end_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    vc_current_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    vc_current_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    ec_start_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    ec_start_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    ec_end_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    ec_end_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    ec_current_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    ec_current_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    vc_end_status = models.CharField(max_length=20, default="off", null=False)
+    ec_car_number = models.ForeignKey(Car)
+    ec_driver_id = models.ForeignKey(Driver)
+    ec_car_number = models.ForeignKey(Car)
+    ec_driver_id = models.ForeignKey(Driver)
+    edate = models.DateField(auto_now_add=True, null=True)
+    estart_time = models.TimeField(auto_now_add=True, null=True, editable=False)
+    eend_time = models.TimeField(auto_now=True)
+
 
     def __str__(self):
         return str(self.jcar_number)

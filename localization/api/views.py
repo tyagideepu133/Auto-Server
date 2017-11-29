@@ -185,7 +185,7 @@ class CarJourneyDetailAPIView(APIView):
 
     def put(self, request, username, pk):
         car_journey = self.get_object(pk)
-        serializer = CarJourneyModelSerializer(car_journey, data=request.data)
+        serializer = CarJourneyModelSerializer(car_journey, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
