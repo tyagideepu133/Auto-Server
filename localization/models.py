@@ -68,14 +68,14 @@ class CarEmergency(models.Model):
     ec_current_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
     ec_current_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
     vc_end_status = models.CharField(max_length=20, default="off", null=False)
-    ec_car_number = models.ForeignKey(Car)
-    ec_driver_id = models.ForeignKey(Driver)
-    ec_car_number = models.ForeignKey(Car)
-    ec_driver_id = models.ForeignKey(Driver)
+    ec_car_number = models.ForeignKey(Car, related_name='+')
+    ec_driver_id = models.ForeignKey(Driver, related_name='+')
+    vc_car_number = models.ForeignKey(Car, related_name='+')
+    vc_driver_id = models.ForeignKey(Driver, related_name='+')
     edate = models.DateField(auto_now_add=True, null=True)
     estart_time = models.TimeField(auto_now_add=True, null=True, editable=False)
     eend_time = models.TimeField(auto_now=True)
 
 
     def __str__(self):
-        return str(self.jcar_number)
+        return str(self.ec_car_number) + str(self.vc_car_number)

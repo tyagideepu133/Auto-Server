@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import (Driver, Car, CarJourney, CarStatus)
+from ..models import (Driver, Car, CarJourney, CarStatus, CarEmergency)
 
 
 class DriverModelSerializer(serializers.ModelSerializer):
@@ -57,4 +57,32 @@ class CarJourneyModelSerializer(serializers.ModelSerializer):
             'jdate',
             'jstart_time',
             'jend_time'
+        ]
+
+
+class EmergencyModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CarEmergency
+        fields = [
+            'id',
+            'vc_start_lat',
+            'vc_start_lon',
+            'vc_end_lat',
+            'vc_end_lon',
+            'vc_current_lat',
+            'vc_current_lon',
+            'ec_start_lat',
+            'ec_start_lon',
+            'ec_end_lat',
+            'ec_end_lon',
+            'ec_current_lat',
+            'ec_current_lon',
+            'vc_end_status',
+            'ec_car_number',
+            'ec_driver_id',
+            'vc_car_number',
+            'vc_driver_id',
+            'edate',
+            'estart_time',
+            'eend_time'
         ]
