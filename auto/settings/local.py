@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'localization',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,13 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.BCryptPasswordHasher',
 ]
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "localization.sockets.routing.channel_routing",
+    },
+}
 
 ROOT_URLCONF = 'auto.urls'
 
