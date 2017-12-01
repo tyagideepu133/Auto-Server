@@ -1,16 +1,17 @@
 from django.db import models
 # from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,AbstractBaseUser
 
 # Create your models here.
 
 
-class Driver(models.Model):
-    user = models.OneToOneField(User)
+class Driver(AbstractBaseUser):
     driver_name = models.CharField(max_length=150)
     driver_dob = models.DateField()
     driver_uidai = models.IntegerField(unique=True)
     driver_dl = models.IntegerField(unique=True)
+    driver_email = models.EmailField(unique=True)
+    USERNAME_FIELD = 'driver_email'
 
     def __str__(self):
         return str(self.driver_name)
@@ -26,11 +27,11 @@ class Car(models.Model):
 
 
 class CarStatus(models.Model):
-    car_lat = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    car_lon = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    car_speed = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    car_fuel = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
-    car_temp = models.DecimalField(null=False, default=0.0, max_digits=6, decimal_places=6)
+    car_lat = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    car_lon = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    car_speed = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    car_fuel = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
+    car_temp = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
     car_status = models.CharField(max_length=20, default="off")
     car_number = models.OneToOneField(Car, primary_key=True)
     car_driver_id = models.ForeignKey(Driver)
