@@ -45,3 +45,4 @@ auto/__pycache__/
 # System Files
 .DS_Store
 Thumbs.db
+/localization/migrations/

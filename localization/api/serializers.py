@@ -11,7 +11,8 @@ class DriverModelSerializer(serializers.ModelSerializer):
             'driver_name',
             'driver_dob',
             'driver_uidai',
-            'user',
+            'email',
+            'password'
         ]
 
 

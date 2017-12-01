@@ -1,8 +1,19 @@
 from django.db import models
 # from django.conf import settings
-from django.contrib.auth.models import User,AbstractBaseUser
+from django.contrib.auth.models import User,AbstractBaseUser, BaseUserManager
 
 # Create your models here.
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None):
+        if not email:
+            raise ValueError("User must have a unique email")
+        user_obj = self.model(
+            email = self.normalize_email(email)
+        )
+        user_obj.set_password(password)
+        user_obj.save(using=self._db)
+        return user_obj
 
 
 class Driver(AbstractBaseUser):
@@ -10,9 +21,10 @@ class Driver(AbstractBaseUser):
     driver_dob = models.DateField()
     driver_uidai = models.IntegerField(unique=True)
     driver_dl = models.IntegerField(unique=True)
-    driver_email = models.EmailField(unique=True)
-    USERNAME_FIELD = 'driver_email'
+    email = models.EmailField(unique=True)
+    USERNAME_FIELD = 'email'
 
+    objects = UserManager
     def __str__(self):
         return str(self.driver_name)
 
