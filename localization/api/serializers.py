@@ -37,6 +37,7 @@ class CarStatusModelSerializer(serializers.ModelSerializer):
             'car_temp',
             'car_status',
             'car_number',
+            'car_type',
             'car_driver_id'
         ]
 

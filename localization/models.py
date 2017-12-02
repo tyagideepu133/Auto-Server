@@ -46,6 +46,7 @@ class CarStatus(models.Model):
     car_temp = models.DecimalField(null=False, default=0.0, max_digits=15, decimal_places=8)
     car_status = models.CharField(max_length=20, default="off")
     car_number = models.OneToOneField(Car, primary_key=True)
+    car_type = models.CharField(max_length=20, default="normal")
     car_driver_id = models.ForeignKey(Driver)
 
     def __str__(self):
@@ -91,4 +92,4 @@ class CarEmergency(models.Model):
 
 
     def __str__(self):
-        return str(self.ec_car_number) + str(self.vc_car_number)
+        return str(self.vc_car_number)
