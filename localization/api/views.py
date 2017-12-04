@@ -168,7 +168,8 @@ class CarJourneysListAPIView(APIView):
     def get(self, request, username):
         car_journeys = self.get_object(username)
         serializer = CarJourneyModelSerializer(car_journeys, many= True)
-        return Response(serializer.data)
+        car_journeys_res = {"results":serializer.data}
+        return Response(car_journeys_res)
 
 
 class CarJourneyDetailAPIView(APIView):
